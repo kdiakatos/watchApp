@@ -1,0 +1,64 @@
+﻿@model IEnumerable<watchApp.Models.Actor>
+
+@{
+    ViewBag.Title = "Index";
+}
+<!--TO notification message to orisame arxika sto actorsControler -->
+
+<div id="notifications">
+</div>
+
+
+
+<h2>Actors</h2>
+<!-- To viewdata to orisame arxika sto actors controlers-->
+<h3>@ViewData["message"]</h3>
+<h4>@Session["Actions"]</h4>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Age)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Age)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-warning" })
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+    }
+
+
+</table>
+<!--sto katv den bazoume apla aytakia alla ayto poy einai dejia apo to 1  ayto 8a to kalesei apo to _layout redersection scripts auto mesa sto div if to phrame coppy paste apo site bootstrap// TO appendTO to balame emeis. Paei sto tellos kai emfanizei to message -->
+@section scripts{
+    <script>
+ //ta autakia ta thelei gia th javascript
+        if ('@TempData["notification-message"]') {
+            $(`<div class="alert alert-@TempData["notification-color"] alert-dismissible fade show" role="alert">
+                <strong>@TempData["notification-message"]</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+             </div>`).appendTo('#notifications')//edw vazoume mesa ton kwdika ths html pou theloume
+                //to append einai ama ksekinisw apo to parent, to append To einai ama ksekinhsw apo to chil
+        }
+    </script>
+}
